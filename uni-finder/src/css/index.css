@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 600;
+  letter-spacing: 4px;
+  background-color: white; 
+  text-align: center;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+h1 {
+  color: #1D1F20;
+  text-transform: uppercase;
+}
+
+h1 span {
+  color: orange;
+}
+
+form {
+  display: inline-block;
+  
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+li {
+  float: left;
+}
+
+input {
+  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 20px 0px 20px 0px;
+  box-sizing: border-box;
+  border: 2px solid black;
+  background-color: #333;
+  border-radius: 4px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: white;
+}
+
+input:hover {
+  background-color: rgb(117, 116, 113);
+}
+
+.uniFormContainer {
+  background:orange;
+  margin-left:5%;
+  margin-right: 55%;
+  background: white;
+}
+
+.contributorsContainer {
+  margin-top: 15%;
+}
+
+.labelClass{
+  color: #1D1F20;
+  margin-bottom: 5px;
+}
+
+.LabelItem {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.navBarLink {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#active {
+  background-color: orange;
+}

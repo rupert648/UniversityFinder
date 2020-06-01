@@ -1,0 +1,35 @@
+
+- Desired Subject
+    - List of subjects
+- NightLife? Which of these would you prefer - select all that apply
+    - Clubbing
+    - HouseParty
+    - Bonfire
+    - Quiet Night in
+    - Pub with mates
+    - Black Tie Ball
+- Do you play a lot of sports? Select One
+    - no sport
+    - small amount for leisure
+    - moderate amount
+    - I am an athlete
+- Where would you prefer to go to University
+    - Scotland
+    - Wales
+    - South England
+    - London
+    - North England
+- Campus, town, or large city?
+    - Campus
+    - small town
+    - large city
+- Does the beauty of the campus bother you?
+- Expected Grades
+    - A level
+        - [A-U] [A-U] [A-U]
+    - Scottish higher
+        - google
+    - IB
+        - google
+
+can expand these questions later.
