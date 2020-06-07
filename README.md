@@ -1,10 +1,13 @@
 # University Matching App
 #### To do
-- [ ] Decide Questions which can be asked.
-- [ ] Create backend Express App to process server requests
+- [x] Decide Questions which can be asked.
+- [x] Create backend Express App to process server requests
     - [ ] Create database of all (UK) universities
         - MongoDB? SQL? just CSV?
+            - [x] MongoDB
         - [ ] Find answers for each university.
-    - [ ] Take form Post, return list of matched universities
+    - [x] Take form Post, return list of matched universities
     - [ ] Create Matching algorithm  
+        - [x] partly done
+        - needs improving
     

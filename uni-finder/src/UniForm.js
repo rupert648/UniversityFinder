@@ -1,6 +1,7 @@
 import React from 'react';
 import LabelItem from './LabelItem'
 import UniCard from './UniCard'
+import ErrorPage from './Errors/ErrorPage'
 var { nightlifeOptions, sportsOptions, locationOptions, campusOptions, subjects} = require('./data/Options')
 const axios = require('axios').default;
 
@@ -16,7 +17,7 @@ class UniForm extends React.Component {
             location: null,
             typeofcampus: null,
             averagerequiredgrades: null,
-            notSubmittedText: {
+            inputStyles: {
                 subjectofstudy: '',
                 nightlife: '',
                 sport: '',
@@ -38,27 +39,32 @@ class UniForm extends React.Component {
     
     handleSubmit(event) {
         event.preventDefault();
-        const {subjectofstudy, nightlife, sport, location, typeofcampus, averagerequiredgrades} = this.state;
+        const {subjectofstudy, nightlife, sport, location, typeofcampus, averagerequiredgrades} = this.state;        
         
         let currentComponent = this;
-        let notSubmittedText = currentComponent.state.notSubmittedText;
-        console.log(notSubmittedText);
+        let inputStyles = currentComponent.state.inputStyles;
+
         let areNullValues = false;
         for (let [key, value] of Object.entries(this.state)) {
             if (value === null) {
                 areNullValues = true;
-                console.log(`${key} : ${value}`)
-                notSubmittedText[key] = '2px solid red';
-                console.log(notSubmittedText)
+                inputStyles[key] = '1px solid red';
             } else {
-                notSubmittedText[key] = '';
+                inputStyles[key] = '';
             }
         }
 
-        console.log(notSubmittedText);
 
         if (!areNullValues) {
-            axios.post('http://localhost:6483/uni-finder', currentComponent.state)
+            let response = {
+                subjectofstudy: subjectofstudy, 
+                nightlife: nightlife, 
+                sport: sport, 
+                location: location, 
+                typeofcampus: typeofcampus, 
+                averagerequiredgrades: averagerequiredgrades
+            }
+            axios.post('http://localhost:6483/uni-finder', response)
                 .then(function (response) {
                     currentComponent.setState({
                         formSubmitted: true,
@@ -68,12 +74,15 @@ class UniForm extends React.Component {
                     console.log(response.data)
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    currentComponent.setState({
+                        formSubmitted: true,
+                        error: error
+                    });
                 });
-            alert("form submitted")
+
         } else {
             currentComponent.setState({
-                notSubmittedText: notSubmittedText
+                inputStyles: inputStyles
             })
         }
     }
@@ -83,11 +92,11 @@ class UniForm extends React.Component {
         const isSubmitted = this.state.formSubmitted;
         if(!isSubmitted) {
             
-            let notSubmittedText = this.state.notSubmittedText;
+            let inputStyles = this.state.inputStyles;
 
             return (                
                 <div class="uniFormContainer">
-                        <h1><span>University</span> Matcher <span>;)</span></h1>
+                        <h1><span>University</span> Matcher</h1>
                     <div >
                     <form onSubmit={this.handleSubmit}>
                         <div>
@@ -97,7 +106,7 @@ class UniForm extends React.Component {
                                 value={this.state.subjectofstudy}
                                 handleChange={this.handleChange}
                                 options = {subjects}
-                                isEmpty={notSubmittedText.subjectofstudy}
+                                isEmpty={inputStyles.subjectofstudy}
                             />
                         </div>
                         <div>
@@ -107,7 +116,7 @@ class UniForm extends React.Component {
                                 value={this.state.nightlife} 
                                 handleChange={this.handleChange}
                                 options = {nightlifeOptions}
-                                isEmpty = {notSubmittedText.nightlife}
+                                isEmpty = {inputStyles.nightlife}
                             />
                         </div>
                         <div>
@@ -117,7 +126,7 @@ class UniForm extends React.Component {
                                 value={this.state.sport} 
                                 handleChange={this.handleChange}
                                 options = {sportsOptions}
-                                isEmpty = {notSubmittedText.sport}
+                                isEmpty = {inputStyles.sport}
                             />
                         </div>
                         <div>
@@ -127,7 +136,7 @@ class UniForm extends React.Component {
                                 value={this.state.location} 
                                 handleChange={this.handleChange}
                                 options = {locationOptions}
-                                isEmpty = {notSubmittedText.location}
+                                isEmpty = {inputStyles.location}
                             />
                         </div>
                         <div>
@@ -137,7 +146,7 @@ class UniForm extends React.Component {
                                 value={this.state.typeofcampus} 
                                 handleChange={this.handleChange}
                                 options = {campusOptions}
-                                isEmpty = {notSubmittedText.typeofcampus}
+                                isEmpty = {inputStyles.typeofcampus}
                             />
                         </div>
                         <div>
@@ -147,7 +156,7 @@ class UniForm extends React.Component {
                                 value={this.state.averagerequiredgrades} 
                                 handleChange={this.handleChange}
                                 options={["hmmmm"]}
-                                isEmpty = {notSubmittedText.averagerequiredgrades}
+                                isEmpty = {inputStyles.averagerequiredgrades}
                             />
                         </div>
                     <input type="submit" value="Submit" />
@@ -156,26 +165,20 @@ class UniForm extends React.Component {
                 </div>
                 )
         } else {
-            var information = this.state.result
-            const uniList = information.map((uni) => {
-                return (
-                    <div>
-                        <UniCard 
-                            uniname={uni.uniname}
-                            typeofcampus={uni.typeofcampus}
-                            sports={uni.sports}
-                            nightlife={uni.nightlife}
-                            location={uni.location}
-                        />
-                    </div>
-                )
-            });
 
-            return (
-                uniList
-            )
+            if (this.state.result) {
+                return (
+                    <UniCard result={this.state.result}/>
+                )
+            } else if (this.state.error){    //error
+                return (
+                    <ErrorPage error={this.state.error} />
+                )
+            } else {
+                //default error
+            }
         }
     }
 }
 
-export default UniForm
+export default UniForm  

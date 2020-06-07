@@ -28,10 +28,9 @@ h1 span {
 
 form {
   display: inline-block;
-  
 }
 
-ul {
+nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -41,7 +40,7 @@ ul {
   transition: 0.5s;
 }
 
-li {
+nav li {
   float: left;
 }
 
@@ -73,7 +72,7 @@ input:hover {
   background: white;
 }
 
-.contributorsContainer {
+.contributorsContainer, .errorPageContainer {
   margin-top: 15%;
 }
 
@@ -93,6 +92,22 @@ input:hover {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+}
+
+/*UniCard */
+
+.UniCard {
+  margin-top: 10%;
+  padding: 5px 100px 5px 100px;
+  background-color: orange;
+}
+
+.UniCard ul {
+  list-style-type: none;
+}
+
+.UniCard li {
+  margin: 5px 0px 5px 0px;
 }
 
 #active {

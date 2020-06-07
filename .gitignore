@@ -1,6 +1,4 @@
 /server/node_modules
 /server/.env
-/server/package-lock.json
-/server/package.json
 /server/.eslintrc.js
 /uni-finder/node_modules
