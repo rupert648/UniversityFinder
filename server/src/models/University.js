@@ -1,7 +1,8 @@
+//mongoose University entry schema
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-
+//University Schema
 var UniEntry = mongoose.Schema({
     uniname: {
         type: String,
@@ -44,7 +45,7 @@ var UniEntry = mongoose.Schema({
         type: String,
         validate: {
             validator: function(v) {    //for now only checking for A level grades
-                return /(A\*|[ABCDEOU]){3}/.test(v);    //regex for A*A*A*
+                return /(A\*|[ABCDEOU]){3}/.test(v);    //regex to check entry is A Level Grade format - uni required grades only 3 letters
             },
             message: props => `${props.value} is not a valid phone number!`
         },
@@ -55,19 +56,23 @@ var UniEntry = mongoose.Schema({
         required: true,
     }
 });
-UniEntry.plugin(uniqueValidator);
+UniEntry.plugin(uniqueValidator);   //enable unique entries
 
+//export SChema
 var UniversityEntry = module.exports = mongoose.model('UniversityEntry', UniEntry);
 
+//Function to query the db for a university given its name
 module.exports.getUniversityByName = function(name, callback) {
     var query = {uniName: name};
     UniversityEntry.findOne(query, callback);
 };
 
+//Function to return all universities from the db
 module.exports.getAll = function(callback) {
     UniversityEntry.find(callback);
 };
 
+//function to save a new university to the db
 module.exports.createNewUni = function(newUni, callback) {
     newUni.save(callback);
 };

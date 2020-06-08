@@ -1,3 +1,4 @@
+//requirements 
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -5,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+//modules
 const universityChooser = require('./api/universityChooser');
 const addUniversity = require('./api/addUniversity');
 const middlewares = require('./middlewares/middlewares');
@@ -22,6 +24,7 @@ db.once('open', function() {
     console.log(`Connected to database at:${process.env.DATABASE_URL}`);
 });
 
+//include requirements into app
 const app = express();
 app.use(morgan('common'));
 app.use(helmet());
@@ -36,10 +39,10 @@ app.use('/uni-finder', universityChooser);
 app.use('/add-new-university', addUniversity);
 
 //called if routes are not completed
-app.use(middlewares.notFound);
+app.use(middlewares.notFound);  //404
+app.use(middlewares.errorHandler);  //delivers error to client
 
-app.use(middlewares.errorHandler);
-
+//start server
 const port = process.env.PORT || 6483;
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);

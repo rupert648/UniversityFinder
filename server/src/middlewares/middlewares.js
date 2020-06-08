@@ -1,3 +1,4 @@
+//This function is called if the request route fits none of our routes
 const notFound = (req, res, next) => {
     const error = new Error(`Not Found - ${req.originalUrl}`);
     res.status(404);    //NOT FOUND

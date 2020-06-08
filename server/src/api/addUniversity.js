@@ -1,17 +1,20 @@
+// Requirements
 const { Router } = require('express');
 const router = new Router();
 
+// Modules
 const University = require('../models/University');
 
+//  /add-new-university post request
 router.post('/', function(req, res) {
-    //this post request can only happen if we are not in dev, else return 404
+    //Can only add uni if not in dev mode - else return 404 error
     if(process.env.NODE_ENV === 'production') {
         const error = new Error(`Not Found - ${req.originalUrl}`);
         res.status(404);
         return error;
     } else {
+        //parse request into format and push into db
         var body = req.body;
-        console.log(body);
         var newUni = new University({
             uniname: body.uniname,
             rankingGuardian: body.rankingGuardian,

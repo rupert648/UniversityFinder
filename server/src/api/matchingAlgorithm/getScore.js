@@ -10,6 +10,7 @@ let weights = {
 };
 
 /* eslint-disable no-unused-vars */
+//This function gets a list of scores, given the client requests and the list of universities
 const getScores = function(body, universities) {
     console.log(body);
     var {
@@ -37,9 +38,9 @@ const getScores = function(body, universities) {
     universities.forEach(uni => {
         let score = 0;
 
-        //different method of getting score for each item
+        //iterate through the different answers given by candidate
         for (let [key, value] of Object.entries(weights)) {
-            console.log(typeof uni[key]);
+            //different method of getting score for each item
             switch(key) {
             case 'nightlife':
                 if (uni[key].includes(body[key])) {
@@ -78,7 +79,7 @@ const getScores = function(body, universities) {
 
     // return top 5
     return results.slice(0, 5);
-}
+};
 
 function sportsScore(weightValue, uniValue, userValue) {
     //for this, if the user DOESNT play sport, it doesn't matter
@@ -95,11 +96,13 @@ function sportsScore(weightValue, uniValue, userValue) {
         else return weightValue/2;  //not too far away from small but weight should be less
         
     case 'moderate': 
+        //amount of sport >= moderate
         if (uniValue === 'none') return 0;
         if (uniValue === 'small') return weightValue/2;
         else return weightValue;
     
     case 'athlete':
+        //amount of sport >= athlete
         if (uniValue === 'none' || uniValue === 'small') return 0;
         if (uniValue === 'moderate') return weightValue/2;
         else return weightValue;
@@ -108,6 +111,9 @@ function sportsScore(weightValue, uniValue, userValue) {
     }
 }
 
+// right now this function is a bit shite
+// simplest solution is to hard code scores based on relative locations
+// in future, if use google maps API, can determine a score based off of an exact distance from desired location.
 function locationScore(weightValue, uniValue, userValue) {
     //we can't just say that if they didn't pick the same location, score = 0
     // if they picked wales, and this location is southwest england, then score is still decently high.
