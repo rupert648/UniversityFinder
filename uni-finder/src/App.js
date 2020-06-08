@@ -6,8 +6,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import UniForm from './UniForm';
-import Contributors from './Contributors';
+import UniForm from './Components/UniForm';
+import Contributors from './Components/Contributors';
 
 class App extends React.Component {
 

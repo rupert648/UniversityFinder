@@ -27,11 +27,7 @@ class LabelItem extends React.Component {
                   return { ...provided, opacity, transition };
                 }
               }
-            // customStyle = {
-            //     control: provided => ({
-                    
-            //     })
-            // }
+
         } else {
             customStyle = {
                 option: (provided, state) => ({

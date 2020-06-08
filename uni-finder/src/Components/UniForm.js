@@ -1,9 +1,9 @@
 import React from 'react';
 import LabelItem from './LabelItem'
 import UniCard from './UniCard'
-import ErrorPage from './Errors/ErrorPage'
-import Select from "react-select";
-var { nightlifeOptions, sportsOptions, locationOptions, campusOptions, subjects, aLevelGrades} = require('./data/Options')
+import ErrorPage from '../Errors/ErrorPage'
+
+var { nightlifeOptions, sportsOptions, locationOptions, campusOptions, subjects, aLevelGrades} = require('../data/Options')
 const axios = require('axios').default;
 
 class UniForm extends React.Component {
