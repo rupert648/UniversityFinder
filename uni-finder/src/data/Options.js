@@ -95,3 +95,14 @@ module.exports.subjects = [
     {value:"Veterinary Medicine", label:"Veterinary Medicine" },
     {value:"Youth Work", label: "Youth Work"}
 ]
+
+module.exports.aLevelGrades = [
+    {value: "A*", label:"A*"},
+    {value: "A", label:"A"},
+    {value: "B", label:"B"},
+    {value: "C", label:"C"},
+    {value: "D", label:"D"},
+    {value: "E", label:"E"},
+    {value: "O", label:"O"},
+    {value: "U", label:"U"},
+]

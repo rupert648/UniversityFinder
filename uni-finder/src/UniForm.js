@@ -2,7 +2,8 @@ import React from 'react';
 import LabelItem from './LabelItem'
 import UniCard from './UniCard'
 import ErrorPage from './Errors/ErrorPage'
-var { nightlifeOptions, sportsOptions, locationOptions, campusOptions, subjects} = require('./data/Options')
+import Select from "react-select";
+var { nightlifeOptions, sportsOptions, locationOptions, campusOptions, subjects, aLevelGrades} = require('./data/Options')
 const axios = require('axios').default;
 
 class UniForm extends React.Component {
@@ -13,17 +14,24 @@ class UniForm extends React.Component {
             subjectofstudy: null,
             formSubmitted: false,
             nightlife: null,
-            sport: null,
+            sports: null,
             location: null,
             typeofcampus: null,
-            averagerequiredgrades: null,
+            grade1: null,
+            grade2: null,
+            grade3: null,
+            grade4: null,
             inputStyles: {
                 subjectofstudy: '',
                 nightlife: '',
-                sport: '',
+                sports: '',
                 location: '',
                 typeofcampus: '',
                 averagerequiredgrades: '',
+                grade1: '',
+                grade2: '',
+                grade3: '',
+                grade4: '',
             },
         };
     
@@ -32,14 +40,14 @@ class UniForm extends React.Component {
     }
     
     handleChange(e, name) {
-        this.setState({
-          [name]: e.value,        
-        });
+            this.setState({
+                [name]: e.value,        
+            });
     }
     
     handleSubmit(event) {
         event.preventDefault();
-        const {subjectofstudy, nightlife, sport, location, typeofcampus, averagerequiredgrades} = this.state;        
+        const {subjectofstudy, nightlife, sports, location, typeofcampus, grades} = this.state;        
         
         let currentComponent = this;
         let inputStyles = currentComponent.state.inputStyles;
@@ -47,19 +55,26 @@ class UniForm extends React.Component {
         let areNullValues = false;
         for (let [key, value] of Object.entries(this.state)) {
             if (value === null) {
-                areNullValues = true;
-                inputStyles[key] = '1px solid red';
-            } else {
+                if (key !== "grade4") { //don't have to have 4 a levels
+                    areNullValues = true;
+                    inputStyles[key] = '1px solid red';
+                }
+            }
+            else {
                 inputStyles[key] = '';
             }
         }
 
-
+        
         if (!areNullValues) {
+
+            let averagerequiredgrades = this.state.grade1 + this.state.grade2 + this.state.grade3 + (this.state.grade4 ? this.state.grade4: '');
+            console.log(averagerequiredgrades);
+
             let response = {
                 subjectofstudy: subjectofstudy, 
                 nightlife: nightlife, 
-                sport: sport, 
+                sports: sports, 
                 location: location, 
                 typeofcampus: typeofcampus, 
                 averagerequiredgrades: averagerequiredgrades
@@ -103,7 +118,6 @@ class UniForm extends React.Component {
                             <LabelItem 
                                 text = {<div class='labelClass'>What subject do you want to study?</div>}
                                 name="subjectofstudy"
-                                value={this.state.subjectofstudy}
                                 handleChange={this.handleChange}
                                 options = {subjects}
                                 isEmpty={inputStyles.subjectofstudy}
@@ -113,7 +127,6 @@ class UniForm extends React.Component {
                             <LabelItem
                                 text={<div class='labelClass'>Which of these 'nights out' would you most prefer?</div>} 
                                 name="nightlife" 
-                                value={this.state.nightlife} 
                                 handleChange={this.handleChange}
                                 options = {nightlifeOptions}
                                 isEmpty = {inputStyles.nightlife}
@@ -122,18 +135,16 @@ class UniForm extends React.Component {
                         <div>
                             <LabelItem 
                                 text={<div class='labelClass'>How much sport would you say you play?</div>} 
-                                name="sport" 
-                                value={this.state.sport} 
+                                name="sports" 
                                 handleChange={this.handleChange}
                                 options = {sportsOptions}
-                                isEmpty = {inputStyles.sport}
+                                isEmpty = {inputStyles.sports}
                             />
                         </div>
                         <div>
                             <LabelItem
                                 text={<div class='labelClass'>Which of these locations would you most prefer?</div>} 
                                 name="location" 
-                                value={this.state.location} 
                                 handleChange={this.handleChange}
                                 options = {locationOptions}
                                 isEmpty = {inputStyles.location}
@@ -143,20 +154,40 @@ class UniForm extends React.Component {
                             <LabelItem
                                 text={<div class='labelClass'>What kind of university site are you looking for?</div>} 
                                 name="typeofcampus" 
-                                value={this.state.typeofcampus} 
                                 handleChange={this.handleChange}
                                 options = {campusOptions}
                                 isEmpty = {inputStyles.typeofcampus}
                             />
                         </div>
-                        <div>
+                        <div class='gradesArea'>
+                            <div>What are your expected Grades (A Level)? (Pick multiple)</div>
                             <LabelItem
-                                text={<div class='labelClass'>Please enter your required grades</div>} 
-                                name="averagerequiredgrades" 
-                                value={this.state.averagerequiredgrades} 
+                                text={<div class='labelClass'>Subject 1</div>} 
+                                name="grade1" 
                                 handleChange={this.handleChange}
-                                options={["hmmmm"]}
-                                isEmpty = {inputStyles.averagerequiredgrades}
+                                options = {aLevelGrades}
+                                isEmpty = {inputStyles.grade1}
+                            />
+                            <LabelItem
+                                text={<div class='labelClass'>Subject 2</div>} 
+                                name="grade2" 
+                                handleChange={this.handleChange}
+                                options = {aLevelGrades}
+                                isEmpty = {inputStyles.grade2}
+                            />
+                            <LabelItem
+                                text={<div class='labelClass'>Subject 3</div>} 
+                                name="grade3" 
+                                handleChange={this.handleChange}
+                                options = {aLevelGrades}
+                                isEmpty = {inputStyles.grade3}
+                            />
+                            <LabelItem
+                                text={<div class='labelClass'>Subject 4</div>} 
+                                name="grade4" 
+                                handleChange={this.handleChange}
+                                options = {aLevelGrades}
+                                isEmpty = {inputStyles.grade4}
                             />
                         </div>
                     <input type="submit" value="Submit" />

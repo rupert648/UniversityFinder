@@ -7,16 +7,21 @@ class UniCard extends React.Component {
     constructor(props) {
         super();
         var information = props.result
+        console.log(information);
         const uniList = information.map((uni) => {
             return (
 
             <div class={"UniCard"}>
                 <h2>University Name: {uni.uniname}</h2>
                 <ul>
-                    <li>Amount of Sports: {uni.sports}</li>
-                    <li>Nightlife: {uni.nightlife}</li>
-                    <li>Location: {uni.location}</li>
-                    <li>Average Required Grades: {uni.averagerequiredgrades}</li>
+                    <li><span>Amount of Sports: </span>{uni.sports}</li>
+                    <li><span>Nightlife: </span>{uni.nightlife}</li>
+                    <li><span>Location: </span>{uni.location}</li>
+                    <li><span>Average Required Grades: </span>{uni.averagerequiredgrades}</li>
+                    <li><span>Guardian Ranking: </span>{uni.rankingGuardian}</li>
+                    <li><span>Undergraduate Class Size: </span>{uni.undergraduateClassSize}</li>
+                    <li><span>Average Required Grades: </span>{uni.averagerequiredgrades}</li>
+                    <li><span>Website: </span><a target="_blank" href={uni.website}>{uni.website}</a></li>
                 </ul>
             </div>
 

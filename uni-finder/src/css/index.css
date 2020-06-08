@@ -97,17 +97,37 @@ input:hover {
 /*UniCard */
 
 .UniCard {
-  margin-top: 10%;
-  padding: 5px 100px 5px 100px;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  width: 50%;
+  padding: 200px 100px 300px 100px;
   background-color: orange;
+  display: table;
 }
 
 .UniCard ul {
   list-style-type: none;
+  text-align: left;
+  
 }
 
 .UniCard li {
   margin: 5px 0px 5px 0px;
+}
+
+.UniCard li span {
+  background-color: white;
+  width: 100px;
+  padding: 1px 3px 1px 3px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.gradesArea {
+  padding: 2px 5px 2px 5px;
+  border-width: 1px;
+  border-radius: 25px;
+  border-style: solid;
 }
 
 #active {
